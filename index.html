@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Архив | Городская клиническая больница №3</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a18;
+    color: #c8b89a;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .header {
+    text-align: center;
+    border-bottom: 1px solid #3a3530;
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+
+  .header h1 {
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8a7a6a;
+    margin-bottom: 8px;
+  }
+
+  .header h2 {
+    font-size: 11px;
+    color: #5a5048;
+    letter-spacing: 2px;
+  }
+
+  .warning {
+    font-size: 11px;
+    color: #5a4a3a;
+    text-align: center;
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .search-bar input {
+    flex: 1;
+    background: #111;
+    border: 1px solid #3a3530;
+    color: #c8b89a;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    outline: none;
+  }
+
+  .search-bar input:focus {
+    border-color: #6a5a4a;
+  }
+
+  .search-bar button {
+    background: #2a2520;
+    border: 1px solid #3a3530;
+    color: #8a7a6a;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .search-bar button:hover {
+    background: #3a3530;
+    color: #c8b89a;
+  }
+
+  .section-title {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #5a5048;
+    margin-bottom: 16px;
+  }
+
+  .records {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .record {
+    border: 1px solid #2a2520;
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .record:hover {
+    border-color: #4a4038;
+    background: #1e1e1a;
+  }
+
+  .record-header {
+    display: flex;
+    gap: 20px;
+    padding: 12px 16px;
+    font-size: 12px;
+    align-items: center;
+  }
+
+  .record-year {
+    color: #5a5048;
+    width: 50px;
+    flex-shrink: 0;
+  }
+
+  .record-name {
+    flex: 1;
+    color: #a09080;
+  }
+
+  .record-ward {
+    color: #5a5048;
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .record-body {
+    display: none;
+    padding: 16px;
+    border-top: 1px solid #2a2520;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #8a7a6a;
+    background: #131210;
+  }
+
+  .record-body.open {
+    display: block;
+  }
+
+  .record-body .field {
+    margin-bottom: 8px;
+  }
+
+  .record-body .label {
+    color: #4a4038;
+    margin-right: 8px;
+  }
+
+  /* Особая запись — палата 7, 1987 */
+  .record.special {
+    border-color: #3a2a1a;
+  }
+
+  .record.special .record-header {
+    background: #1a1510;
+  }
+
+  .record.special .record-name {
+    color: #8a6a5a;
+  }
+
+  .hidden-note {
+    display: none;
+  }
+
+  .footer-note {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 10px;
+    color: #2a2520;
+    letter-spacing: 2px;
+  }
+
+  /* Пасхалка 3: почти невидимый текст */
+  .invisible-text {
+    color: #1b1b18;
+    font-size: 10px;
+    user-select: text;
+    margin-top: 20px;
+    text-align: center;
+  }
+</style>
+<!-- АРХИВ v.1.4.2 | ПОСЛЕДНЕЕ ОБНОВЛЕНИЕ 2024 | ОЦИФРОВКА: ЧАСТИЧНАЯ -->
+<!-- EASTER_EGG_1: файл сканирования archives_raw/ward7_1987_jan.tif — размер: 2.1MB — статус: ПОВРЕЖДЁН -->
+</head>
+<body>
+
+<div class="header">
+  <h1>Городская клиническая больница №3 — Чистополь</h1>
+  <h2>Архив историй болезни · Неврологическое отделение · 1970–2010</h2>
+</div>
+
+<div class="warning">
+  Данные частично оцифрованы. Архив 1970–1995 гг. восстановлен из бумажных носителей.<br>
+  Часть записей повреждена. Доступ для авторизованных пользователей.
+</div>
+
+<div class="search-bar" style="margin-bottom: 40px;">
+  <input type="text" id="searchInput" placeholder="Поиск по фамилии, году, палате...">
+  <button onclick="filterRecords()">Найти</button>
+</div>
+
+<div class="records" id="recordsList">
+
+  <div class="section-title">Записи 1980–1995</div>
+
+  <div class="record" onclick="toggleRecord(this)">
+    <div class="record-header">
+      <span class="record-year">1983</span>
+      <span class="record-name">Сафина Р.Г., 1934 г.р.</span>
+      <span class="record-ward">Палата 3</span>
+    </div>
+    <div class="record-body">
+      <div class="field"><span class="label">Диагноз:</span>ОНМК ишемический, первичный</div>
+      <div class="field"><span class="label">Поступление:</span>17.03.1983</div>
+      <div class="field"><span class="label">Исход:</span>Выписана 04.04.1983</div>
+    </div>
+  </div>
+
+  <div class="record" onclick="toggleRecord(this)">
+    <div class="record-header">
+      <span class="record-year">1985</span>
+      <span class="record-name">Кузнецов В.П., 1940 г.р.</span>
+      <span class="record-ward">Палата 2</span>
+    </div>
+    <div class="record-body">
+      <div class="field"><span class="label">Диагноз:</span>Транзиторная ишемическая атака</div>
+      <div class="field"><span class="label">Поступление:</span>22.11.1985</div>
+      <div class="field"><span class="label">Исход:</span>Выписан 10.12.1985</div>
+    </div>
+  </div>
+
+  <div class="record" onclick="toggleRecord(this)">
+    <div class="record-header">
+      <span class="record-year">1986</span>
+      <span class="record-name">Миронова Е.С., 1948 г.р.</span>
+      <span class="record-ward">Палата 5</span>
+    </div>
+    <div class="record-body">
+      <div class="field"><span class="label">Диагноз:</span>ОНМК геморрагический</div>
+      <div class="field"><span class="label">Поступление:</span>03.07.1986</div>
+      <div class="field"><span class="label">Исход:</span>Выписана 28.07.1986</div>
+    </div>
+  </div>
+
+  <!-- ОСОБАЯ ЗАПИСЬ — палата 7, 1987 -->
+  <div class="record special" id="ward7record" onclick="toggleRecord(this)">
+    <div class="record-header">
+      <span class="record-year">1987</span>
+      <span class="record-name">Арзякова В.И., 1957 г.р.</span>
+      <span class="record-ward">Палата 7</span>
+    </div>
+    <div class="record-body" id="ward7body">
+      <div class="field"><span class="label">Диагноз:</span>ОНМК по ишемическому типу, повторный</div>
+      <div class="field"><span class="label">Дата поступления:</span>08.01.1987</div>
+      <div class="field"><span class="label">Состояние при поступлении:</span>Тяжёлое. Поздняя госпитализация.</div>
+      <div class="field"><span class="label">Сопутствующие:</span>СД 2 типа. АГ.</div>
+      <div class="field" style="margin-top: 12px; border-top: 1px solid #2a2520; padding-top: 12px;">
+        <span class="label">Примечание:</span>
+        <span style="color: #7a6a5a;">Со слов соседей — симптомы наблюдались с декабря 1986 г. Муж сообщил о госпитализации с задержкой. Скорая не вызывалась своевременно.</span>
+      </div>
+      <div class="field" style="margin-top: 12px;">
+        <span class="label">Исход:</span>
+        <span style="color: #6a4a3a;">Летальный. 14.01.1987.</span>
+      </div>
+      <!-- EASTER_EGG_2: Арзякова В.И. — Валентина Ивановна. Фамилия совпадает. Проверь родословную. -->
+    </div>
+  </div>
+
+  <div class="record" onclick="toggleRecord(this)">
+    <div class="record-header">
+      <span class="record-year">1989</span>
+      <span class="record-name">Хасанов Р.Ф., 1931 г.р.</span>
+      <span class="record-ward">Палата 4</span>
+    </div>
+    <div class="record-body">
+      <div class="field"><span class="label">Диагноз:</span>ОНМК ишемический</div>
+      <div class="field"><span class="label">Поступление:</span>11.02.1989</div>
+      <div class="field"><span class="label">Исход:</span>Выписан 05.03.1989</div>
+    </div>
+  </div>
+
+  <div class="record" onclick="toggleRecord(this)">
+    <div class="record-header">
+      <span class="record-year">1993</span>
+      <span class="record-name">Петрова А.М., 1945 г.р.</span>
+      <span class="record-ward">Палата 7</span>
+    </div>
+    <div class="record-body">
+      <div class="field"><span class="label">Диагноз:</span>ОНМК ишемический, повторный</div>
+      <div class="field"><span class="label">Поступление:</span>19.09.1993</div>
+      <div class="field"><span class="label">Примечание:</span>Стандартная госпитализация.</div>
+      <div class="field"><span class="label">Исход:</span>Выписана 07.10.1993</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Пасхалка 3: выделить мышью нижний блок -->
+<div class="invisible-text" id="easter3">
+  EASTER_EGG_3 :: палата 7 :: 08.01 :: три поколения :: дед — 1987 — не вызвал :: отец — 2026 — не вызвал :: код: GENERATION
+</div>
+
+<div class="footer-note">
+  ГКБ №3 · Чистополь · Архив неврологического отделения<br>
+  Оцифровка завершена частично · 2024
+</div>
+
+<script>
+function toggleRecord(el) {
+  const body = el.querySelector('.record-body');
+  body.classList.toggle('open');
+
+  if (el.id === 'ward7record' && body.classList.contains('open')) {
+    console.log('CLUE_FOUND: ward_7_1987');
+    el.style.borderColor = '#5a4a3a';
+  }
+}
+
+function filterRecords() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const records = document.querySelectorAll('.record');
+
+  records.forEach(r => {
+    const text = r.textContent.toLowerCase();
+    r.style.display = text.includes(query) || query === '' ? '' : 'none';
+  });
+}
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') filterRecords();
+});
+
+console.log('%c АРХИВ ГКБ №3 ', 'background:#1a1a18; color:#8a7a6a; font-size:14px;');
+console.log('%c EASTER_EGG_1 обнаружен: archives_raw/ward7_1987_jan.tif :: ПОВРЕЖДЁН :: последнее изменение 08.01.1987 ', 'color:#5a4a3a; font-size:11px;');
+console.log('%c Подсказка: поищи фамилию в строке поиска ', 'color:#3a3530; font-size:10px;');
+</script>
+
+</body>
+</html>
