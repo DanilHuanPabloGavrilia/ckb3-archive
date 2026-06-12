@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Личный дневник · Н.В.А.</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a18;
+    color: #c8b89a;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  /* ── Экран пароля ── */
+  #lock-screen {
+    position: fixed;
+    inset: 0;
+    background: #1a1a18;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+
+  #lock-screen h1 {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #6a5a4a;
+    margin-bottom: 10px;
+  }
+
+  #lock-screen p {
+    font-size: 11px;
+    color: #3a3530;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+  }
+
+  .lock-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lock-form label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #4a4038;
+    text-transform: uppercase;
+  }
+
+  .lock-form input {
+    background: #111;
+    border: 1px solid #3a3530;
+    color: #c8b89a;
+    padding: 12px 20px;
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 6px;
+    text-align: center;
+    outline: none;
+    width: 220px;
+  }
+
+  .lock-form input:focus {
+    border-color: #6a5a4a;
+  }
+
+  .lock-form button {
+    background: #2a2520;
+    border: 1px solid #3a3530;
+    color: #8a7a6a;
+    padding: 10px 32px;
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .lock-form button:hover {
+    background: #3a3530;
+    color: #c8b89a;
+  }
+
+  #lock-error {
+    font-size: 11px;
+    color: #7a3a2a;
+    height: 16px;
+    margin-top: 4px;
+  }
+
+  /* ── Дневник (скрыт до ввода пароля) ── */
+  #diary {
+    display: none;
+    max-width: 680px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  #diary.visible {
+    opacity: 1;
+  }
+
+  .diary-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #2a2520;
+  }
+
+  .diary-header h1 {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #5a5048;
+    margin-bottom: 8px;
+  }
+
+  .diary-header p {
+    font-size: 11px;
+    color: #3a3530;
+  }
+
+  /* ── Запись дневника ── */
+  .entry {
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #222220;
+  }
+
+  .entry:last-of-type {
+    border-bottom: none;
+  }
+
+  .entry-date {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #5a5048;
+    margin-bottom: 20px;
+  }
+
+  .entry-text {
+    font-size: 13px;
+    line-height: 2;
+    color: #a09080;
+    white-space: pre-wrap;
+  }
+
+  .entry-text em {
+    color: #7a6a5a;
+    font-style: normal;
+  }
+
+  /* ── Аудиозаметка ── */
+  .audio-section {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px dashed #2a2520;
+    text-align: center;
+  }
+
+  .audio-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #4a4038;
+    margin-bottom: 16px;
+  }
+
+  .audio-date {
+    font-size: 12px;
+    color: #6a5a4a;
+    margin-bottom: 20px;
+  }
+
+  .audio-text {
+    font-size: 12px;
+    color: #5a4a3a;
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+
+  #audio-player {
+    display: none;
+  }
+
+  audio {
+    width: 100%;
+    max-width: 360px;
+    filter: invert(0.8) sepia(0.5);
+    opacity: 0.7;
+  }
+
+  .audio-missing {
+    font-size: 11px;
+    color: #3a3530;
+    font-style: italic;
+  }
+
+  .footer-note {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 10px;
+    color: #2a2520;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Экран блокировки -->
+<div id="lock-screen">
+  <h1>Личный дневник</h1>
+  <p>Защищено паролем</p>
+  <div class="lock-form">
+    <label>Дата рождения без точек (ДДММГГГГ)</label>
+    <input type="password" id="password-input" maxlength="8" placeholder="••••••••"
+           autocomplete="off" inputmode="numeric">
+    <div id="lock-error"></div>
+    <button onclick="checkPassword()">Открыть</button>
+  </div>
+</div>
+
+<!-- Дневник -->
+<div id="diary">
+  <div class="diary-header">
+    <h1>Н. В. Арзякова · личный дневник</h1>
+    <p>Декабрь 2025</p>
+  </div>
+
+  <div class="entry">
+    <div class="entry-date">02 декабря 2025</div>
+    <div class="entry-text">Голова с утра. Не завтракала — мутит немного.
+Саша говорит давление, наверное. Выпью таблетку.
+
+Катя принесла мне воды. <em>Сама.</em> Я не просила.
+Она замечает всегда.
+
+Само пройдёт.</div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-date">16 декабря 2025</div>
+    <div class="entry-text">Уже две недели.
+Сегодня не смогла встать до двенадцати — лежала. Слабость такая что руки не поднять.
+
+Данил звонил. Я сказала всё нормально. Не хочу беспокоить.
+Он и так там — один, бизнес, всё на нём.
+
+Саша говорит — выпей таблетку. Ну да.
+
+Катя весь день за столом. Рисует что-то. Не отвлекаю её.</div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-date">28 декабря 2025</div>
+    <div class="entry-text">Почти месяц. Три недели уже.
+
+Хотела вызвать врача — Саша сказал подождём.
+«Само пройдёт, ты же знаешь.»
+
+Он боится. Я вижу. Просто не умеет когда страшно.
+Я тоже не умею. Поэтому молчу.
+
+Скоро новый год. Некогда болеть.
+Катя нарисовала ёлку. Красивая.</div>
+  </div>
+
+  <!-- Аудиозаметка -->
+  <div class="audio-section">
+    <div class="audio-label">Голосовая заметка</div>
+    <div class="audio-date">03 января 2026 · 11:20</div>
+    <div class="audio-text">«Саша не хочет. Катя рядом.<br>Голова... не проходит.»</div>
+    <div id="audio-player">
+      <!-- audio_jan3.ogg — записать и добавить в эту папку -->
+      <audio controls src="audio_jan3.ogg"
+             oncanplay="document.getElementById('audio-player').style.display='block'"
+             onerror="document.getElementById('audio-unavailable').style.display='block'">
+      </audio>
+    </div>
+    <div id="audio-unavailable" class="audio-missing" style="display:none">
+      [файл повреждён или недоступен]
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Архив личных записей · частный документ
+  </div>
+</div>
+
+<script>
+function checkPassword() {
+  const input = document.getElementById('password-input').value.trim();
+  const error = document.getElementById('lock-error');
+
+  if (input === '14031969') {
+    document.getElementById('lock-screen').style.opacity = '0';
+    document.getElementById('lock-screen').style.transition = 'opacity 0.5s';
+
+    setTimeout(() => {
+      document.getElementById('lock-screen').style.display = 'none';
+      const diary = document.getElementById('diary');
+      diary.style.display = 'block';
+      setTimeout(() => diary.classList.add('visible'), 30);
+
+      // Пробуем загрузить аудио
+      const audio = new Audio('audio_jan3.ogg');
+      audio.oncanplay = () => {
+        document.getElementById('audio-player').style.display = 'block';
+      };
+      audio.onerror = () => {
+        document.getElementById('audio-unavailable').style.display = 'block';
+      };
+    }, 500);
+  } else {
+    error.textContent = 'Неверный пароль';
+    document.getElementById('password-input').value = '';
+    setTimeout(() => { error.textContent = ''; }, 2000);
+  }
+}
+
+document.getElementById('password-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPassword();
+});
+</script>
+
+</body>
+</html>

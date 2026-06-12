@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Детализация вызовов | Дело Арзяковой Н.В.</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a18;
+    color: #c8b89a;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .header {
+    text-align: center;
+    border-bottom: 1px solid #3a3530;
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+
+  .header .stamp {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #5a4a3a;
+    margin-bottom: 8px;
+    border: 1px solid #3a2a1a;
+    display: inline-block;
+    padding: 4px 16px;
+  }
+
+  .header h1 {
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #9a8a7a;
+    margin: 12px 0 6px;
+  }
+
+  .header p {
+    font-size: 11px;
+    color: #4a4038;
+  }
+
+  .meta-block {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    border: 1px solid #2a2520;
+    padding: 16px 20px;
+    background: #131210;
+    font-size: 11px;
+  }
+
+  .meta-row {
+    display: flex;
+    margin-bottom: 5px;
+  }
+
+  .meta-label {
+    color: #4a4038;
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .meta-value {
+    color: #7a6a5a;
+  }
+
+  .table-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  thead th {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #5a5048;
+    border-bottom: 1px solid #3a3530;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: normal;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #1e1e1c;
+    color: #7a6a5a;
+  }
+
+  tbody tr:hover td {
+    background: #1c1c1a;
+    color: #9a8a7a;
+  }
+
+  tbody tr.critical td {
+    color: #9a4a3a;
+    background: #1e1310;
+    border-bottom: 1px solid #3a2218;
+  }
+
+  tbody tr.critical:hover td {
+    background: #221510;
+  }
+
+  tbody tr.critical td strong {
+    font-weight: normal;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border: 1px solid;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .badge-ok {
+    border-color: #2a2a28;
+    color: #4a4038;
+  }
+
+  .badge-dropped {
+    border-color: #6a3020;
+    color: #9a4a3a;
+    background: #1e1210;
+  }
+
+  .badge-ok-second {
+    border-color: #3a3530;
+    color: #5a5048;
+  }
+
+  .critical-note {
+    max-width: 900px;
+    margin: 14px auto 0;
+    font-size: 11px;
+    color: #7a4a3a;
+    padding: 12px 16px;
+    border-left: 2px solid #6a3020;
+    background: #1a1210;
+    line-height: 1.7;
+  }
+
+  .footer-note {
+    max-width: 900px;
+    margin: 40px auto 0;
+    font-size: 10px;
+    color: #2a2520;
+    border-top: 1px solid #222220;
+    padding-top: 16px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="stamp">Запрошено в рамках следственных действий</div>
+  <h1>Арзякова Наталья Викторовна · Детализация вызовов</h1>
+  <p>Период выписки: 15.12.2025 — 10.01.2026</p>
+</div>
+
+<div class="meta-block">
+  <div class="meta-row">
+    <span class="meta-label">Абонент:</span>
+    <span class="meta-value">Арзякова Наталья Викторовна, 14.03.1969 г.р.</span>
+  </div>
+  <div class="meta-row">
+    <span class="meta-label">Номер абонента:</span>
+    <span class="meta-value">+7 (987) 321-**-** (скрыт по запросу)</span>
+  </div>
+  <div class="meta-row">
+    <span class="meta-label">Тип договора:</span>
+    <span class="meta-value">Постоплатный · физ. лицо</span>
+  </div>
+  <div class="meta-row">
+    <span class="meta-label">Регион:</span>
+    <span class="meta-value">Республика Татарстан · г. Чистополь</span>
+  </div>
+  <div class="meta-row">
+    <span class="meta-label">Дата формирования выписки:</span>
+    <span class="meta-value">12.01.2026 · по запросу следственного органа</span>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Время</th>
+        <th>Направление</th>
+        <th>Номер / Служба</th>
+        <th>Длительность</th>
+        <th>Статус</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>16.12.2025</td>
+        <td>14:07</td>
+        <td>входящий</td>
+        <td>+7 (987) 321-**-**</td>
+        <td>8 мин 22 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>20.12.2025</td>
+        <td>19:50</td>
+        <td>входящий</td>
+        <td>+7 (903) ***-**-**</td>
+        <td>3 мин 41 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>23.12.2025</td>
+        <td>11:33</td>
+        <td>исходящий</td>
+        <td>+7 (987) 321-**-**</td>
+        <td>2 мин 09 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>27.12.2025</td>
+        <td>10:14</td>
+        <td>входящий</td>
+        <td>+7 (987) 321-**-**</td>
+        <td>12 мин 47 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>29.12.2025</td>
+        <td>19:33</td>
+        <td>входящий</td>
+        <td>+7 (903) ***-**-**</td>
+        <td>4 мин 12 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>31.12.2025</td>
+        <td>15:40</td>
+        <td>исходящий</td>
+        <td>+7 (987) 321-**-**</td>
+        <td>8 мин 05 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>01.01.2026</td>
+        <td>00:12</td>
+        <td>исходящий</td>
+        <td>+7 (987) 321-**-**</td>
+        <td>2 мин 30 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>02.01.2026</td>
+        <td>09:47</td>
+        <td>входящий</td>
+        <td>+7 (987) 321-**-**</td>
+        <td>3 мин 22 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>03.01.2026</td>
+        <td>11:20</td>
+        <td>исходящий</td>
+        <td>+7 (987) 321-**-**</td>
+        <td>0 мин 47 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+      <tr>
+        <td>04.01.2026</td>
+        <td>16:55</td>
+        <td>входящий</td>
+        <td>+7 (903) ***-**-**</td>
+        <td>1 мин 15 сек</td>
+        <td><span class="badge badge-ok">ЗАВЕРШЁН</span></td>
+      </tr>
+
+      <!-- КРИТИЧЕСКАЯ СТРОКА -->
+      <tr class="critical">
+        <td>05.01.2026</td>
+        <td>14:23:07</td>
+        <td>исходящий</td>
+        <td><strong>103</strong> &nbsp;(скорая помощь)</td>
+        <td><strong>0 мин 04 сек</strong></td>
+        <td><span class="badge badge-dropped">СБРОШЕН</span></td>
+      </tr>
+
+      <tr>
+        <td>08.01.2026</td>
+        <td>09:15</td>
+        <td>исходящий</td>
+        <td>103 &nbsp;(скорая помощь)</td>
+        <td>4 мин 37 сек</td>
+        <td><span class="badge badge-ok-second">ЗАВЕРШЁН</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="critical-note">
+  05.01.2026 · 14:23:07 — исходящий вызов на 103 (скорая помощь) — длительность 4 секунды — соединение прервано со стороны абонента.<br>
+  Следующий вызов в службу 103 зафиксирован <strong>08.01.2026</strong> — три дня спустя. Госпитализация поздняя.
+</div>
+
+<div class="footer-note">
+  Данные предоставлены по запросу следственного органа · Татарстан · 2026<br>
+  Выписка сформирована автоматически. Персональные данные частично скрыты.
+</div>
+
+</body>
+</html>
