@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Форум Чистополя :: Горбольница №3 — Палата 7</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #d6d2c8;
+    color: #333;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+  }
+
+  /* ── Шапка форума ─────────────────────────────── */
+  .top-bar {
+    background: #4a6741;
+    color: #d4e8c8;
+    padding: 3px 10px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .top-bar a { color: #a8d498; text-decoration: none; }
+  .top-bar a:hover { text-decoration: underline; }
+
+  .forum-header {
+    background: linear-gradient(180deg, #5c7f50 0%, #3d5a34 100%);
+    padding: 14px 16px 10px;
+    border-bottom: 2px solid #2a4020;
+  }
+
+  .forum-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e8f4e0;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .forum-subtitle {
+    font-size: 11px;
+    color: #9ab88a;
+    margin-top: 3px;
+  }
+
+  /* ── Навигация (хлебные крошки) ────────────────── */
+  .breadcrumb {
+    background: #e8e4da;
+    border-bottom: 1px solid #c0bab0;
+    padding: 6px 14px;
+    font-size: 11px;
+    color: #666;
+  }
+
+  .breadcrumb a { color: #4a6741; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  /* ── Заголовок темы ─────────────────────────────── */
+  .topic-head {
+    background: #f0ece4;
+    border: 1px solid #c8c2b8;
+    border-bottom: none;
+    padding: 12px 14px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .topic-head h1 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3d5a34;
+    margin-bottom: 4px;
+  }
+
+  .topic-head .topic-meta {
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* ── Контейнер постов ───────────────────────────── */
+  .posts {
+    margin: 0 10px 10px;
+    border: 1px solid #c8c2b8;
+    border-top: none;
+  }
+
+  /* ── Один пост ─────────────────────────────────── */
+  .post {
+    display: flex;
+    border-bottom: 1px solid #d8d4ca;
+    background: #fafaf6;
+  }
+
+  .post:last-child { border-bottom: none; }
+
+  .post:nth-child(even) { background: #f4f0e8; }
+
+  .post-side {
+    width: 130px;
+    min-width: 130px;
+    background: #e4e0d8;
+    border-right: 1px solid #c8c2b8;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .post-avatar {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 8px;
+    background: #b8b4a8;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #888;
+  }
+
+  .post-username {
+    font-weight: bold;
+    color: #3d5a34;
+    font-size: 11px;
+    word-break: break-all;
+    margin-bottom: 5px;
+  }
+
+  .post-rank {
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 5px;
+  }
+
+  .post-posts-count {
+    font-size: 10px;
+    color: #aaa;
+  }
+
+  .post-body {
+    flex: 1;
+    padding: 12px 16px;
+  }
+
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e0dcd4;
+  }
+
+  .post-num {
+    font-size: 11px;
+    color: #888;
+  }
+
+  .post-date {
+    font-size: 10px;
+    color: #aaa;
+  }
+
+  .post-text {
+    line-height: 1.7;
+    color: #333;
+    font-size: 12px;
+  }
+
+  .post-text p { margin-bottom: 8px; }
+  .post-text p:last-child { margin-bottom: 0; }
+
+  .quote-block {
+    background: #e8e4dc;
+    border-left: 3px solid #9ab88a;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-style: italic;
+    color: #555;
+    font-size: 11px;
+  }
+
+  .quote-block .quote-author {
+    font-weight: bold;
+    color: #4a6741;
+    font-style: normal;
+    margin-bottom: 3px;
+    font-size: 10px;
+  }
+
+  /* ── Специальный пост-новый 2026 ───────────────── */
+  .post.post-new {
+    background: #fdf8f0;
+  }
+
+  .post.post-new:nth-child(even) {
+    background: #fdf8f0;
+  }
+
+  .post.post-new .post-side {
+    background: #ede8dc;
+  }
+
+  .post.post-new .post-username {
+    color: #8b3a3a;
+  }
+
+  .new-badge {
+    display: inline-block;
+    background: #8b3a3a;
+    color: #fff;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+
+  /* ── Пагинация ─────────────────────────────────── */
+  .pagination {
+    margin: 8px 10px;
+    font-size: 11px;
+    color: #888;
+  }
+
+  .pagination a {
+    color: #4a6741;
+    text-decoration: none;
+    padding: 2px 6px;
+    border: 1px solid #c8c2b8;
+    background: #f0ece4;
+    margin-right: 3px;
+  }
+
+  /* ── Сноска ─────────────────────────────────────── */
+  .forum-footer {
+    margin: 20px 10px 16px;
+    font-size: 10px;
+    color: #aaa;
+    text-align: center;
+  }
+
+  /* ── Скрытый текст для пасхалки ─────────────────── */
+  .hidden-egg {
+    color: #d6d2c8;
+    font-size: 9px;
+    user-select: text;
+    cursor: default;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>Форум Чистополя | <a href="#">Главная</a> | <a href="#">Разделы</a> | <a href="#">Поиск</a></span>
+  <span><a href="#">Войти</a> | <a href="#">Регистрация</a></span>
+</div>
+
+<div class="forum-header">
+  <div class="forum-title">Форум города Чистополя</div>
+  <div class="forum-subtitle">Городское сообщество с 2003 года · Татарстан</div>
+</div>
+
+<div class="breadcrumb">
+  <a href="#">Главная</a> &nbsp;»&nbsp;
+  <a href="#">Городские вопросы</a> &nbsp;»&nbsp;
+  <a href="#">Медицина и больницы</a> &nbsp;»&nbsp;
+  Горбольница №3 — странные истории (палата 7)
+</div>
+
+<div class="topic-head">
+  <h1>Горбольница №3 — странные истории (палата 7)</h1>
+  <div class="topic-meta">Автор: <strong>Natalochka83</strong> · Опубликована: 12 марта 2011 · Просмотров: 1 842 · Ответов: 14</div>
+</div>
+
+<div class="pagination">
+  Страница: <a href="#">1</a>
+</div>
+
+<div class="posts">
+
+  <!-- ── Пост 1 (автор темы, 2011) ─────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">🌸</div>
+      <div class="post-username">Natalochka83</div>
+      <div class="post-rank">Участник</div>
+      <div class="post-posts-count">Сообщений: 47</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#1</span>
+        <span class="post-date">12.03.2011 · 22:14</span>
+      </div>
+      <div class="post-text">
+        <p>Девочки, у кого-то лежали родственники в неврологии второй горбольницы? Конкретно в палате 7? Мама лежала там три недели в феврале, вернулась и говорит что по ночам видела женщину в белом. Стоит в конце коридора у окна. Сначала думала что медсестра. Но медсестры ей говорили что никого нет.</p>
+        <p>Может это просто после болезни так бывает? Или у кого-то похожее было?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 2 (2011) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">👤</div>
+      <div class="post-username">местный79</div>
+      <div class="post-rank">Старожил</div>
+      <div class="post-posts-count">Сообщений: 312</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#2</span>
+        <span class="post-date">12.03.2011 · 23:41</span>
+      </div>
+      <div class="post-text">
+        <p>Про эту палату давно говорят. Ещё в советское время что-то было. Не помню деталей — слышал от деда. Но в народе её называют «нехорошей».</p>
+        <p>Неврология вообще специфическое отделение. Там и не такое бывает.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 3 (2012) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">🌺</div>
+      <div class="post-username">Svetlana_Ch</div>
+      <div class="post-rank">Участник</div>
+      <div class="post-posts-count">Сообщений: 108</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#3</span>
+        <span class="post-date">04.06.2012 · 10:07</span>
+      </div>
+      <div class="post-text">
+        <p>У меня свекровь там лежала в 2009-м. Тоже что-то похожее рассказывала. Говорила что ночью слышала как кто-то стоит у её кровати. Но когда смотрела — никого.</p>
+        <div class="quote-block">
+          <div class="quote-author">Natalochka83:</div>
+          видела женщину в белом. Стоит в конце коридора у окна
+        </div>
+        <p>Про женщину у окна — это интересно. Несколько человек независимо говорили одно и то же.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 4 (2013) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">👤</div>
+      <div class="post-username">andrey_t16</div>
+      <div class="post-rank">Новый</div>
+      <div class="post-posts-count">Сообщений: 3</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#4</span>
+        <span class="post-date">17.01.2013 · 14:52</span>
+      </div>
+      <div class="post-text">
+        <p>Работал там на ремонте в 2011. Поздно оставался, один. Ничего не видел. Но было ощущение. Очень неприятное. Из палаты 7 вышел быстро. Причём зашёл просто розетку глянуть.</p>
+        <p>Может совпадение. Может атмосфера.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 5 (2014) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">🌸</div>
+      <div class="post-username">Marina_Chistopol</div>
+      <div class="post-rank">Участник</div>
+      <div class="post-posts-count">Сообщений: 215</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#5</span>
+        <span class="post-date">03.09.2014 · 09:18</span>
+      </div>
+      <div class="post-text">
+        <p>Девочки, а кто знает медсестру которая там уже лет 25 работает? Такая немногословная, всегда в очках. Я у неё спросила про слухи — она прямо не ответила. Сказала «пациенты в неврологии видят разное». И ушла. Но как она это сказала... странно.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 6 (2015) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">👤</div>
+      <div class="post-username">местный79</div>
+      <div class="post-rank">Старожил</div>
+      <div class="post-posts-count">Сообщений: 312</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#6</span>
+        <span class="post-date">04.09.2014 · 20:33</span>
+      </div>
+      <div class="post-text">
+        <p>Нашёл кое-что. Дед говорил — в 1987 году в этой палате умерла женщина. Молодая ещё. Фамилию не помню. Муж привёз поздно уже. Говорили что он знал что плохо, но не торопился. Больница уже ничего не могла сделать.</p>
+        <p>Говорят она там и осталась. Ждёт.</p>
+        <p>Суеверия конечно. Но историю эту в отделении помнят.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 7 (2015) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">🌺</div>
+      <div class="post-username">Sveta1981</div>
+      <div class="post-rank">Участник</div>
+      <div class="post-posts-count">Сообщений: 66</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#7</span>
+        <span class="post-date">05.09.2014 · 11:20</span>
+      </div>
+      <div class="post-text">
+        <p>Ждёт кого? 😨</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 8 (2015) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">👤</div>
+      <div class="post-username">местный79</div>
+      <div class="post-rank">Старожил</div>
+      <div class="post-posts-count">Сообщений: 312</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#8</span>
+        <span class="post-date">05.09.2014 · 14:05</span>
+      </div>
+      <div class="post-text">
+        <p>Тех у кого то же самое.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Пост 9 (2018) ──────────────────────────── -->
+  <div class="post">
+    <div class="post-side">
+      <div class="post-avatar">🌸</div>
+      <div class="post-username">Natalochka83</div>
+      <div class="post-rank">Участник</div>
+      <div class="post-posts-count">Сообщений: 47</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#9</span>
+        <span class="post-date">22.07.2018 · 22:54</span>
+      </div>
+      <div class="post-text">
+        <p>Зашла в тему через несколько лет. Мама уже поправилась давно. Но всё равно иногда думаю об этом.</p>
+        <p>Она никогда не рассказывала об этом при детях. Говорила что не хочет пугать. Но мне однажды ночью сказала — «она стояла у окна. смотрела на меня. я не испугалась. мне было её жалко».</p>
+        <p>Не знаю почему это запомнила. Просто запомнила.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── разрыв во времени ─────────────────────── -->
+  <div style="background:#e8e0d0; border-bottom:1px solid #c8c2b8; padding:6px 16px; font-size:10px; color:#999; text-align:center;">
+    — Тема неактивна 5 лет 6 месяцев —
+  </div>
+
+  <!-- ── Пост 10 — НОВЫЙ 2026 ────────────────────── -->
+  <div class="post post-new">
+    <div class="post-side">
+      <div class="post-avatar">👤</div>
+      <div class="post-username">arzuasha</div>
+      <div class="post-rank" style="color:#8b3a3a;">Новый</div>
+      <div class="post-posts-count">Сообщений: 1</div>
+    </div>
+    <div class="post-body">
+      <div class="post-header">
+        <span class="post-num">#10 <span class="new-badge">НОВОЕ</span></span>
+        <span class="post-date">14.01.2026 · 03:41</span>
+      </div>
+      <div class="post-text">
+        <p>извините что пишу так поздно.</p>
+        <p>мама лежала там в январе. палата 7. она тоже видела её. женщину у окна. говорила нам — мы думали бред после инсульта.</p>
+        <p>мамы больше нет. она умерла 8 января.</p>
+        <p>я нашла эту тему случайно. читала и руки тряслись. потому что мама описывала точно так же. белый халат. окно в конце коридора. и говорила «она смотрит на меня. ей тоже плохо было».</p>
+        <p>вы написали что это было в 1987 году. та женщина. что муж привёз поздно и ничего не смогли сделать.</p>
+        <p>у моей мамы тоже была возможность вызвать скорую раньше. её не вызвали.</p>
+        <p>я не знаю зачем это пишу. просто хочу чтобы кто-то ещё знал.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /posts -->
+
+<div class="pagination">
+  Страница: <a href="#">1</a>
+</div>
+
+<div class="forum-footer">
+  Форум Чистополя · Powered by SimpleBoard 2.4 · Время сервера: 06:28 МСК<br>
+  <span class="hidden-egg">арзякова в.и. 08.01.1987 палата 7 / арзякова н.в. 08.01.2026 палата 7 / цикл не случаен</span>
+</div>
+
+</body>
+</html>
