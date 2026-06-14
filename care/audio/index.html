@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>голосовое_3января.m4a</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#1c1c1a; color:#b0a090; font-family:'Courier New',monospace; font-size:12px; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px 60px; }
+.label { font-size:10px; color:#4a4038; letter-spacing:3px; text-transform:uppercase; margin-bottom:32px; text-align:center; }
+.player-box { width:100%; max-width:440px; background:#222220; border:1px solid #2a2520; padding:24px 28px; margin-bottom:24px; }
+.file-name { font-size:11px; color:#6a5a4a; letter-spacing:2px; margin-bottom:16px; }
+.waveform { height:48px; background:#1a1a18; border:1px solid #2a2520; margin-bottom:16px; display:flex; align-items:center; padding:0 12px; gap:2px; }
+.bar { width:3px; border-radius:1px; background:#4a4038; }
+.controls { display:flex; align-items:center; gap:12px; }
+.play-btn { background:none; border:1px solid #4a4038; color:#7a6a5a; font-family:'Courier New',monospace; font-size:10px; letter-spacing:2px; padding:6px 14px; cursor:pointer; transition:all .15s; }
+.play-btn:hover { border-color:#8a7a6a; color:#a09080; }
+.duration { font-size:10px; color:#3a3530; }
+.transcript { max-width:440px; width:100%; }
+.transcript-label { font-size:9px; color:#3a3530; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; }
+.transcript-text { font-size:13px; line-height:2.2; color:#8a7a6a; font-style:italic; }
+.transcript-text em { color:#c8b89a; font-style:normal; }
+.divider { width:100%; max-width:440px; border-top:1px solid #2a2520; margin:28px 0; }
+.note { max-width:440px; width:100%; font-size:11px; color:#336699; background:#1a2030; border-left:3px solid #336699; padding:10px 14px; line-height:1.7; }
+</style>
+</head>
+<body>
+
+<div class="label">Архив планшета Алёны · голосовые заметки</div>
+
+<div class="player-box">
+  <div class="file-name">голосовое_3января.m4a &nbsp;·&nbsp; 03.01.2026 · 03:17</div>
+  <div class="waveform" id="waveform"></div>
+  <div class="controls">
+    <button class="play-btn" onclick="togglePlay()">▶ PLAY</button>
+    <span class="duration" id="dur">0:00 / 0:38</span>
+  </div>
+</div>
+
+<div class="transcript">
+  <div class="transcript-label">расшифровка</div>
+  <div class="transcript-text">
+    <em>«Саша не хочет.</em><br>
+    Катя рядом.<br>
+    Голова...<br>
+    <em>не проходит.</em><br>
+    Уже три... наверное три недели.<br>
+    Я не хотела беспокоить.<br>
+    <em>Саша сказал — само пройдёт.</em><br>
+    Может само пройдёт.<br>
+    Наверное само пройдёт.»
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="note">нашли. хорошо.<br>отправьте эту запись — или эту страницу — @ArzyakovBot</div>
+
+<script>
+// Генерируем визуальный waveform
+const wf = document.getElementById('waveform');
+const heights = [18,24,32,20,38,28,44,36,22,40,30,48,34,26,42,38,24,46,32,28,44,36,20,38,30,22,40,34,28,42,26,36,20,32,44,28,38,22];
+heights.forEach(h => {
+  const bar = document.createElement('div');
+  bar.className = 'bar';
+  bar.style.height = h + 'px';
+  wf.appendChild(bar);
+});
+
+let playing = false;
+let t = 0;
+let interval;
+const btn = document.querySelector('.play-btn');
+const dur = document.getElementById('dur');
+
+function togglePlay() {
+  if (playing) {
+    clearInterval(interval);
+    btn.textContent = '▶ PLAY';
+    playing = false;
+  } else {
+    playing = true;
+    btn.textContent = '⏸ PAUSE';
+    interval = setInterval(() => {
+      t++;
+      if (t >= 38) { t = 0; clearInterval(interval); btn.textContent = '▶ PLAY'; playing = false; }
+      const m = Math.floor(t/60);
+      const s = t % 60;
+      dur.textContent = `0:${s.toString().padStart(2,'0')} / 0:38`;
+      // Пульсация барграфа
+      document.querySelectorAll('.bar').forEach((b,i) => {
+        const h = heights[i];
+        b.style.height = (h * (0.6 + 0.4 * Math.random())) + 'px';
+        b.style.background = playing ? '#7a6a5a' : '#4a4038';
+      });
+    }, 1000);
+  }
+}
+</script>
+</body>
+</html>
