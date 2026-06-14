@@ -6,250 +6,48 @@
 <title>Форум Чистополя :: Горбольница №3 — Палата 7</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-
-  body {
-    background: #d6d2c8;
-    color: #333;
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 12px;
-  }
-
-  /* ── Шапка форума ─────────────────────────────── */
-  .top-bar {
-    background: #4a6741;
-    color: #d4e8c8;
-    padding: 3px 10px;
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .top-bar a { color: #a8d498; text-decoration: none; }
-  .top-bar a:hover { text-decoration: underline; }
-
-  .forum-header {
-    background: linear-gradient(180deg, #5c7f50 0%, #3d5a34 100%);
-    padding: 14px 16px 10px;
-    border-bottom: 2px solid #2a4020;
-  }
-
-  .forum-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #e8f4e0;
-    letter-spacing: 0.5px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  }
-
-  .forum-subtitle {
-    font-size: 11px;
-    color: #9ab88a;
-    margin-top: 3px;
-  }
-
-  /* ── Навигация (хлебные крошки) ────────────────── */
-  .breadcrumb {
-    background: #e8e4da;
-    border-bottom: 1px solid #c0bab0;
-    padding: 6px 14px;
-    font-size: 11px;
-    color: #666;
-  }
-
-  .breadcrumb a { color: #4a6741; text-decoration: none; }
-  .breadcrumb a:hover { text-decoration: underline; }
-
-  /* ── Заголовок темы ─────────────────────────────── */
-  .topic-head {
-    background: #f0ece4;
-    border: 1px solid #c8c2b8;
-    border-bottom: none;
-    padding: 12px 14px;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  .topic-head h1 {
-    font-size: 14px;
-    font-weight: bold;
-    color: #3d5a34;
-    margin-bottom: 4px;
-  }
-
-  .topic-head .topic-meta {
-    font-size: 11px;
-    color: #888;
-  }
-
-  /* ── Контейнер постов ───────────────────────────── */
-  .posts {
-    margin: 0 10px 10px;
-    border: 1px solid #c8c2b8;
-    border-top: none;
-  }
-
-  /* ── Один пост ─────────────────────────────────── */
-  .post {
-    display: flex;
-    border-bottom: 1px solid #d8d4ca;
-    background: #fafaf6;
-  }
-
-  .post:last-child { border-bottom: none; }
-
-  .post:nth-child(even) { background: #f4f0e8; }
-
-  .post-side {
-    width: 130px;
-    min-width: 130px;
-    background: #e4e0d8;
-    border-right: 1px solid #c8c2b8;
-    padding: 14px 10px;
-    text-align: center;
-  }
-
-  .post-avatar {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 8px;
-    background: #b8b4a8;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: #888;
-  }
-
-  .post-username {
-    font-weight: bold;
-    color: #3d5a34;
-    font-size: 11px;
-    word-break: break-all;
-    margin-bottom: 5px;
-  }
-
-  .post-rank {
-    font-size: 10px;
-    color: #888;
-    margin-bottom: 5px;
-  }
-
-  .post-posts-count {
-    font-size: 10px;
-    color: #aaa;
-  }
-
-  .post-body {
-    flex: 1;
-    padding: 12px 16px;
-  }
-
-  .post-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #e0dcd4;
-  }
-
-  .post-num {
-    font-size: 11px;
-    color: #888;
-  }
-
-  .post-date {
-    font-size: 10px;
-    color: #aaa;
-  }
-
-  .post-text {
-    line-height: 1.7;
-    color: #333;
-    font-size: 12px;
-  }
-
-  .post-text p { margin-bottom: 8px; }
-  .post-text p:last-child { margin-bottom: 0; }
-
-  .quote-block {
-    background: #e8e4dc;
-    border-left: 3px solid #9ab88a;
-    padding: 8px 12px;
-    margin: 8px 0;
-    font-style: italic;
-    color: #555;
-    font-size: 11px;
-  }
-
-  .quote-block .quote-author {
-    font-weight: bold;
-    color: #4a6741;
-    font-style: normal;
-    margin-bottom: 3px;
-    font-size: 10px;
-  }
-
-  /* ── Специальный пост-новый 2026 ───────────────── */
-  .post.post-new {
-    background: #fdf8f0;
-  }
-
-  .post.post-new:nth-child(even) {
-    background: #fdf8f0;
-  }
-
-  .post.post-new .post-side {
-    background: #ede8dc;
-  }
-
-  .post.post-new .post-username {
-    color: #8b3a3a;
-  }
-
-  .new-badge {
-    display: inline-block;
-    background: #8b3a3a;
-    color: #fff;
-    font-size: 9px;
-    padding: 1px 5px;
-    border-radius: 2px;
-    margin-left: 5px;
-    vertical-align: middle;
-  }
-
-  /* ── Пагинация ─────────────────────────────────── */
-  .pagination {
-    margin: 8px 10px;
-    font-size: 11px;
-    color: #888;
-  }
-
-  .pagination a {
-    color: #4a6741;
-    text-decoration: none;
-    padding: 2px 6px;
-    border: 1px solid #c8c2b8;
-    background: #f0ece4;
-    margin-right: 3px;
-  }
-
-  /* ── Сноска ─────────────────────────────────────── */
-  .forum-footer {
-    margin: 20px 10px 16px;
-    font-size: 10px;
-    color: #aaa;
-    text-align: center;
-  }
-
-  /* ── Скрытый текст для пасхалки ─────────────────── */
-  .hidden-egg {
-    color: #d6d2c8;
-    font-size: 9px;
-    user-select: text;
-    cursor: default;
-  }
+  body { background:#d6d2c8; color:#333; font-family:Verdana,Arial,sans-serif; font-size:12px; }
+  .top-bar { background:#4a6741; color:#d4e8c8; padding:3px 10px; font-size:11px; display:flex; justify-content:space-between; }
+  .top-bar a { color:#a8d498; text-decoration:none; }
+  .top-bar a:hover { text-decoration:underline; }
+  .forum-header { background:linear-gradient(180deg,#5c7f50 0%,#3d5a34 100%); padding:14px 16px 10px; border-bottom:2px solid #2a4020; }
+  .forum-title { font-size:22px; font-weight:bold; color:#e8f4e0; letter-spacing:.5px; text-shadow:1px 1px 2px rgba(0,0,0,.5); }
+  .forum-subtitle { font-size:11px; color:#9ab88a; margin-top:3px; }
+  .breadcrumb { background:#e8e4da; border-bottom:1px solid #c0bab0; padding:6px 14px; font-size:11px; color:#666; }
+  .breadcrumb a { color:#4a6741; text-decoration:none; }
+  .breadcrumb a:hover { text-decoration:underline; }
+  .topic-head { background:#f0ece4; border:1px solid #c8c2b8; border-bottom:none; padding:12px 14px; margin:10px 10px 0; }
+  .topic-head h1 { font-size:14px; font-weight:bold; color:#3d5a34; margin-bottom:4px; }
+  .topic-head .topic-meta { font-size:11px; color:#888; }
+  .posts { margin:0 10px 10px; border:1px solid #c8c2b8; border-top:none; }
+  .post { display:flex; border-bottom:1px solid #d8d4ca; background:#fafaf6; }
+  .post:last-child { border-bottom:none; }
+  .post:nth-child(even) { background:#f4f0e8; }
+  .post-side { width:130px; min-width:130px; background:#e4e0d8; border-right:1px solid #c8c2b8; padding:14px 10px; text-align:center; }
+  .post-avatar { width:48px; height:48px; margin:0 auto 8px; background:#b8b4a8; border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#888; }
+  .post-username { font-weight:bold; color:#3d5a34; font-size:11px; word-break:break-all; margin-bottom:5px; }
+  .post-rank { font-size:10px; color:#888; margin-bottom:5px; }
+  .post-posts-count { font-size:10px; color:#aaa; }
+  .post-body { flex:1; padding:12px 16px; }
+  .post-header { display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #e0dcd4; }
+  .post-num { font-size:11px; color:#888; }
+  .post-date { font-size:10px; color:#aaa; }
+  .post-text { line-height:1.7; color:#333; font-size:12px; }
+  .post-text p { margin-bottom:8px; }
+  .post-text p:last-child { margin-bottom:0; }
+  .quote-block { background:#e8e4dc; border-left:3px solid #9ab88a; padding:8px 12px; margin:8px 0; font-style:italic; color:#555; font-size:11px; }
+  .quote-block .quote-author { font-weight:bold; color:#4a6741; font-style:normal; margin-bottom:3px; font-size:10px; }
+  .post.post-new { background:#fdf8f0; }
+  .post.post-new:nth-child(even) { background:#fdf8f0; }
+  .post.post-new .post-side { background:#ede8dc; }
+  .post.post-new .post-username { color:#8b3a3a; }
+  .new-badge { display:inline-block; background:#8b3a3a; color:#fff; font-size:9px; padding:1px 5px; border-radius:2px; margin-left:5px; vertical-align:middle; }
+  .gap-bar { background:#e8e0d0; border-bottom:1px solid #c8c2b8; padding:6px 16px; font-size:10px; color:#999; text-align:center; }
+  .pagination { margin:8px 10px; font-size:11px; color:#888; }
+  .pagination a { color:#4a6741; text-decoration:none; padding:2px 6px; border:1px solid #c8c2b8; background:#f0ece4; margin-right:3px; }
+  .forum-footer { margin:20px 10px 16px; font-size:10px; color:#aaa; text-align:center; }
+  .hidden-egg { color:#d6d2c8; font-size:9px; user-select:text; cursor:default; }
+  .post-text a { color:#4a6741; }
 </style>
 </head>
 <body>
@@ -258,248 +56,477 @@
   <span>Форум Чистополя | <a href="#">Главная</a> | <a href="#">Разделы</a> | <a href="#">Поиск</a></span>
   <span><a href="#">Войти</a> | <a href="#">Регистрация</a></span>
 </div>
-
 <div class="forum-header">
   <div class="forum-title">Форум города Чистополя</div>
   <div class="forum-subtitle">Городское сообщество с 2003 года · Татарстан</div>
 </div>
-
 <div class="breadcrumb">
-  <a href="#">Главная</a> &nbsp;»&nbsp;
-  <a href="#">Городские вопросы</a> &nbsp;»&nbsp;
-  <a href="#">Медицина и больницы</a> &nbsp;»&nbsp;
-  Горбольница №3 — странные истории (палата 7)
+  <a href="#">Главная</a> &nbsp;»&nbsp; <a href="#">Городские вопросы</a> &nbsp;»&nbsp; <a href="#">Медицина и больницы</a> &nbsp;»&nbsp; Горбольница №3 — странные истории (палата 7)
 </div>
-
 <div class="topic-head">
   <h1>Горбольница №3 — странные истории (палата 7)</h1>
-  <div class="topic-meta">Автор: <strong>Natalochka83</strong> · Опубликована: 12 марта 2011 · Просмотров: 1 842 · Ответов: 14</div>
+  <div class="topic-meta">Автор: <strong>Natalochka83</strong> · Опубликована: 12 марта 2011 · Просмотров: 6 447 · Ответов: 49</div>
 </div>
-
-<div class="pagination">
-  Страница: <a href="#">1</a>
-</div>
+<div class="pagination">Страница: <a href="#">1</a> <a href="#">2</a> <a href="#">3</a></div>
 
 <div class="posts">
 
-  <!-- ── Пост 1 (автор темы, 2011) ─────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">🌸</div>
-      <div class="post-username">Natalochka83</div>
-      <div class="post-rank">Участник</div>
-      <div class="post-posts-count">Сообщений: 47</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#1</span>
-        <span class="post-date">12.03.2011 · 22:14</span>
-      </div>
-      <div class="post-text">
-        <p>Девочки, у кого-то лежали родственники в неврологии второй горбольницы? Конкретно в палате 7? Мама лежала там три недели в феврале, вернулась и говорит что по ночам видела женщину в белом. Стоит в конце коридора у окна. Сначала думала что медсестра. Но медсестры ей говорили что никого нет.</p>
-        <p>Может это просто после болезни так бывает? Или у кого-то похожее было?</p>
-      </div>
-    </div>
-  </div>
+<!-- #1 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">Natalochka83</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 47</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#1</span><span class="post-date">12.03.2011 · 22:14</span></div>
+  <div class="post-text">
+    <p>Девочки, у кого-то лежали родственники в неврологии второй горбольницы? Конкретно в палате 7? Мама лежала там три недели в феврале, вернулась и говорит что по ночам видела женщину в белом. Стоит в конце коридора у окна. Сначала думала что медсестра. Но медсестры ей говорили что никого нет.</p>
+    <p>Может это просто после болезни так бывает? Или у кого-то похожее было?</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 2 (2011) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">👤</div>
-      <div class="post-username">местный79</div>
-      <div class="post-rank">Старожил</div>
-      <div class="post-posts-count">Сообщений: 312</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#2</span>
-        <span class="post-date">12.03.2011 · 23:41</span>
-      </div>
-      <div class="post-text">
-        <p>Про эту палату давно говорят. Ещё в советское время что-то было. Не помню деталей — слышал от деда. Но в народе её называют «нехорошей».</p>
-        <p>Неврология вообще специфическое отделение. Там и не такое бывает.</p>
-      </div>
-    </div>
-  </div>
+<!-- #2 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">местный79</div><div class="post-rank">Старожил</div><div class="post-posts-count">Сообщений: 312</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#2</span><span class="post-date">12.03.2011 · 23:41</span></div>
+  <div class="post-text">
+    <p>Про эту палату давно говорят. Ещё в советское время что-то было. Не помню деталей — слышал от деда. Но в народе её называют «нехорошей».</p>
+    <p>Неврология вообще специфическое отделение. Там и не такое бывает.</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 3 (2012) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">🌺</div>
-      <div class="post-username">Svetlana_Ch</div>
-      <div class="post-rank">Участник</div>
-      <div class="post-posts-count">Сообщений: 108</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#3</span>
-        <span class="post-date">04.06.2012 · 10:07</span>
-      </div>
-      <div class="post-text">
-        <p>У меня свекровь там лежала в 2009-м. Тоже что-то похожее рассказывала. Говорила что ночью слышала как кто-то стоит у её кровати. Но когда смотрела — никого.</p>
-        <div class="quote-block">
-          <div class="quote-author">Natalochka83:</div>
-          видела женщину в белом. Стоит в конце коридора у окна
-        </div>
-        <p>Про женщину у окна — это интересно. Несколько человек независимо говорили одно и то же.</p>
-      </div>
-    </div>
-  </div>
+<!-- #3 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">tatiana_b</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 29</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#3</span><span class="post-date">13.03.2011 · 08:22</span></div>
+  <div class="post-text">
+    <p>Брат лежал в 2008. Тоже рассказывал про коридор ночью. Что свет в конце горит хотя его всегда гасят. Мы не придали значения. Болезнь, стресс.</p>
+    <p>А мама именно видела силуэт или свет?</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 4 (2013) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">👤</div>
-      <div class="post-username">andrey_t16</div>
-      <div class="post-rank">Новый</div>
-      <div class="post-posts-count">Сообщений: 3</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#4</span>
-        <span class="post-date">17.01.2013 · 14:52</span>
-      </div>
-      <div class="post-text">
-        <p>Работал там на ремонте в 2011. Поздно оставался, один. Ничего не видел. Но было ощущение. Очень неприятное. Из палаты 7 вышел быстро. Причём зашёл просто розетку глянуть.</p>
-        <p>Может совпадение. Может атмосфера.</p>
-      </div>
-    </div>
-  </div>
+<!-- #4 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">Natalochka83</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 47</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#4</span><span class="post-date">13.03.2011 · 12:05</span></div>
+  <div class="post-text">
+    <p>Силуэт. В белом. Она говорит что сначала подумала медсестра — ночные обходы же делают. Потом заметила что не двигается. Просто стоит и смотрит в окно.</p>
+    <p>Мама у меня не из суеверных вообще. Поэтому и запомнила.</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 5 (2014) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">🌸</div>
-      <div class="post-username">Marina_Chistopol</div>
-      <div class="post-rank">Участник</div>
-      <div class="post-posts-count">Сообщений: 215</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#5</span>
-        <span class="post-date">03.09.2014 · 09:18</span>
-      </div>
-      <div class="post-text">
-        <p>Девочки, а кто знает медсестру которая там уже лет 25 работает? Такая немногословная, всегда в очках. Я у неё спросила про слухи — она прямо не ответила. Сказала «пациенты в неврологии видят разное». И ушла. Но как она это сказала... странно.</p>
-      </div>
-    </div>
-  </div>
+<!-- #5 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">irina_forum</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 88</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#5</span><span class="post-date">14.03.2011 · 09:10</span></div>
+  <div class="post-text">
+    <p>Это называется гипнагогические галлюцинации. Очень типичны для неврологических пациентов, особенно при нарушениях сна. Не надо искать мистику там где есть медицинское объяснение.</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 6 (2015) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">👤</div>
-      <div class="post-username">местный79</div>
-      <div class="post-rank">Старожил</div>
-      <div class="post-posts-count">Сообщений: 312</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#6</span>
-        <span class="post-date">04.09.2014 · 20:33</span>
-      </div>
-      <div class="post-text">
-        <p>Нашёл кое-что. Дед говорил — в 1987 году в этой палате умерла женщина. Молодая ещё. Фамилию не помню. Муж привёз поздно уже. Говорили что он знал что плохо, но не торопился. Больница уже ничего не могла сделать.</p>
-        <p>Говорят она там и осталась. Ждёт.</p>
-        <p>Суеверия конечно. Но историю эту в отделении помнят.</p>
-      </div>
-    </div>
-  </div>
+<!-- #6 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">местный79</div><div class="post-rank">Старожил</div><div class="post-posts-count">Сообщений: 312</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#6</span><span class="post-date">14.03.2011 · 20:18</span></div>
+  <div class="post-text">
+    <p>Ирина, возможно. Но тогда почему несколько человек из разных годов описывают одно и то же? Женщина. Белый. Окно в конце коридора. Одинаково?</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 7 (2015) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">🌺</div>
-      <div class="post-username">Sveta1981</div>
-      <div class="post-rank">Участник</div>
-      <div class="post-posts-count">Сообщений: 66</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#7</span>
-        <span class="post-date">05.09.2014 · 11:20</span>
-      </div>
-      <div class="post-text">
-        <p>Ждёт кого? 😨</p>
-      </div>
-    </div>
-  </div>
+<!-- #7 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Svetlana_Ch</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 108</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#7</span><span class="post-date">04.06.2012 · 10:07</span></div>
+  <div class="post-text">
+    <p>У меня свекровь там лежала в 2009-м. Тоже что-то похожее рассказывала. Говорила что ночью слышала как кто-то стоит у её кровати. Но когда смотрела — никого.</p>
+    <div class="quote-block"><div class="quote-author">Natalochka83:</div>видела женщину в белом. Стоит в конце коридора у окна</div>
+    <p>Про женщину у окна — это интересно. Несколько человек независимо говорили одно и то же.</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 8 (2015) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">👤</div>
-      <div class="post-username">местный79</div>
-      <div class="post-rank">Старожил</div>
-      <div class="post-posts-count">Сообщений: 312</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#8</span>
-        <span class="post-date">05.09.2014 · 14:05</span>
-      </div>
-      <div class="post-text">
-        <p>Тех у кого то же самое.</p>
-      </div>
-    </div>
-  </div>
+<!-- #8 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">dima_ch</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 5</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#8</span><span class="post-date">05.06.2012 · 17:03</span></div>
+  <div class="post-text">
+    <p>Брат лежал в четвёртой палате — ничего не видел. Может дело именно в седьмой?</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 9 (2018) ──────────────────────────── -->
-  <div class="post">
-    <div class="post-side">
-      <div class="post-avatar">🌸</div>
-      <div class="post-username">Natalochka83</div>
-      <div class="post-rank">Участник</div>
-      <div class="post-posts-count">Сообщений: 47</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#9</span>
-        <span class="post-date">22.07.2018 · 22:54</span>
-      </div>
-      <div class="post-text">
-        <p>Зашла в тему через несколько лет. Мама уже поправилась давно. Но всё равно иногда думаю об этом.</p>
-        <p>Она никогда не рассказывала об этом при детях. Говорила что не хочет пугать. Но мне однажды ночью сказала — «она стояла у окна. смотрела на меня. я не испугалась. мне было её жалко».</p>
-        <p>Не знаю почему это запомнила. Просто запомнила.</p>
-      </div>
-    </div>
-  </div>
+<!-- #9 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">andrey_t16</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 3</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#9</span><span class="post-date">17.01.2013 · 14:52</span></div>
+  <div class="post-text">
+    <p>Работал там на ремонте в 2011. Поздно оставался, один. Ничего не видел. Но было ощущение. Очень неприятное. Из палаты 7 вышел быстро. Причём зашёл просто розетку глянуть.</p>
+    <p>Может совпадение. Может атмосфера.</p>
+  </div></div>
+</div>
 
-  <!-- ── разрыв во времени ─────────────────────── -->
-  <div style="background:#e8e0d0; border-bottom:1px solid #c8c2b8; padding:6px 16px; font-size:10px; color:#999; text-align:center;">
-    — Тема неактивна 5 лет 6 месяцев —
-  </div>
+<!-- #10 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">olga_1980</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 61</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#10</span><span class="post-date">18.01.2013 · 09:15</span></div>
+  <div class="post-text">
+    <p>Простите, отвлекусь — кто знает телефон регистратуры нового корпуса? Нигде не могу найти актуальный номер.</p>
+  </div></div>
+</div>
 
-  <!-- ── Пост 10 — НОВЫЙ 2026 ────────────────────── -->
-  <div class="post post-new">
-    <div class="post-side">
-      <div class="post-avatar">👤</div>
-      <div class="post-username">arzuasha</div>
-      <div class="post-rank" style="color:#8b3a3a;">Новый</div>
-      <div class="post-posts-count">Сообщений: 1</div>
-    </div>
-    <div class="post-body">
-      <div class="post-header">
-        <span class="post-num">#10 <span class="new-badge">НОВОЕ</span></span>
-        <span class="post-date">14.01.2026 · 03:41</span>
-      </div>
-      <div class="post-text">
-        <p>извините что пишу так поздно.</p>
-        <p>мама лежала там в январе. палата 7. она тоже видела её. женщину у окна. говорила нам — мы думали бред после инсульта.</p>
-        <p>мамы больше нет. она умерла 8 января.</p>
-        <p>я нашла эту тему случайно. читала и руки тряслись. потому что мама описывала точно так же. белый халат. окно в конце коридора. и говорила «она смотрит на меня. ей тоже плохо было».</p>
-        <p>вы написали что это было в 1987 году. та женщина. что муж привёз поздно и ничего не смогли сделать.</p>
-        <p>у моей мамы тоже была возможность вызвать скорую раньше. её не вызвали.</p>
-        <p>я не знаю зачем это пишу. просто хочу чтобы кто-то ещё знал.</p>
-      </div>
-    </div>
+<!-- #11 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Marina_Chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 215</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#11</span><span class="post-date">03.09.2014 · 09:18</span></div>
+  <div class="post-text">
+    <p>Девочки, а кто знает медсестру которая там уже лет 25 работает? Такая немногословная, всегда в очках. Я у неё спросила про слухи — она прямо не ответила. Сказала «пациенты в неврологии видят разное». И ушла. Но как она это сказала... странно.</p>
+  </div></div>
+</div>
+
+<!-- #12 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">местный79</div><div class="post-rank">Старожил</div><div class="post-posts-count">Сообщений: 312</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#12</span><span class="post-date">04.09.2014 · 20:33</span></div>
+  <div class="post-text">
+    <p>Нашёл кое-что. Дед говорил — в 1987 году в этой палате умерла женщина. Молодая ещё. Фамилию не помню. Муж привёз поздно уже. Говорили что он знал что плохо, но не торопился. Больница уже ничего не могла сделать.</p>
+    <p>Говорят она там и осталась. Ждёт.</p>
+    <p>Суеверия конечно. Но историю эту в отделении помнят.</p>
+  </div></div>
+</div>
+
+<!-- #13 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Sveta1981</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 66</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#13</span><span class="post-date">05.09.2014 · 11:20</span></div>
+  <div class="post-text"><p>Ждёт кого? 😨</p></div>
   </div>
+</div>
+
+<!-- #14 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">местный79</div><div class="post-rank">Старожил</div><div class="post-posts-count">Сообщений: 312</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#14</span><span class="post-date">05.09.2014 · 14:05</span></div>
+  <div class="post-text"><p>Тех у кого то же самое.</p></div>
+  </div>
+</div>
+
+<!-- #15 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">katerina_nn</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 2</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#15</span><span class="post-date">06.09.2014 · 08:44</span></div>
+  <div class="post-text"><p>страшно блин читать перед сном)</p></div>
+  </div>
+</div>
+
+<!-- #16 Модератор -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🛡</div><div class="post-username">Модератор</div><div class="post-rank" style="color:#8b3a3a;">Модератор</div><div class="post-posts-count">Сообщений: —</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#16</span><span class="post-date">06.09.2014 · 10:00</span></div>
+  <div class="post-text"><p>Прошу соблюдать правила форума. Оставайтесь в рамках темы, не нагнетайте. Личные нападки удаляются.</p></div>
+  </div>
+</div>
+
+<!-- #17 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Marina_Chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 215</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#17</span><span class="post-date">07.09.2014 · 12:31</span></div>
+  <div class="post-text">
+    <p>Модератор, мы в рамках. Уточняю по медсестре — в очках, седоватые волосы, работает там, по словам одной санитарки, уже больше тридцати лет. Зовут, кажется, Валентина Степановна.</p>
+  </div></div>
+</div>
+
+<!-- #18 КЛЮЧЕВОЙ ПОСТ — ВАЛЕНТИНА -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">liuda_f</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 14</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#18</span><span class="post-date">22.10.2014 · 09:12</span></div>
+  <div class="post-text">
+    <p>Я лежала в неврологии в 2012 с мамой (перелом и что-то неврологическое сразу). Валентина Степановна — это да. Не медсестра а просто человек. Ночью придёт, сядет на пять минут, поговорит. Мама всегда её ждала.</p>
+    <p>Про слухи о палате она нам не рассказывала ничего. Но один раз мама спросила — она помолчала и сказала только «здесь всякое бывало». И сменила тему.</p>
+  </div></div>
+</div>
+
+<!-- #19 — ГЛАВНЫЙ ПОСТ с «жаль что перевели» -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">yulia_chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 39</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#19</span><span class="post-date">23.10.2014 · 14:33</span></div>
+  <div class="post-text">
+    <p>Хочу тоже написать — Валентина Степановна настоящий профессионал. Тридцать лет в неврологии второй горбольницы, и всё с такой отдачей. Очень жаль что перевели — говорят куда-то в терапию другого корпуса, уже в 2021 или когда там был приказ.</p>
+    <p>Пациенты расстроились. Некоторые специально к ней приезжали.</p>
+  </div></div>
+</div>
+
+<!-- #20 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Svetlana_Ch</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 108</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#20</span><span class="post-date">24.10.2014 · 10:02</span></div>
+  <div class="post-text"><p>жаль. такие люди нужны именно в неврологии — там особые пациенты, им нужна особая мягкость.</p></div>
+  </div>
+</div>
+
+<!-- #21 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">andrey_t16</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 3</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#21</span><span class="post-date">02.11.2014 · 17:20</span></div>
+  <div class="post-text"><p>Возвращаясь к теме — то ощущение в палате было реальным. Не придуманным. Я человек не суеверный совсем. Но там было что-то.</p></div>
+  </div>
+</div>
+
+<!-- #22 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">призрак_чистополя</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 77</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#22</span><span class="post-date">15.12.2014 · 00:01</span></div>
+  <div class="post-text">
+    <p>В 1987 году через это отделение прошли десятки пациентов. Это не секрет, архивы больницы существуют. Если кому интересно — там можно кое-что поискать.</p>
+    <p>История с женщиной в палате 7 — не легенда. Это реальный случай. Конкретный человек. Конкретная дата поступления.</p>
+  </div></div>
+</div>
+
+<!-- #23 Скептик -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">marina_skeptic</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 154</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#23</span><span class="post-date">16.12.2014 · 08:55</span></div>
+  <div class="post-text"><p>В каждой больнице в каждом году умирают пациенты. Это норма. Не надо делать из этого мистику.</p></div>
+  </div>
+</div>
+
+<!-- #24 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">местный79</div><div class="post-rank">Старожил</div><div class="post-posts-count">Сообщений: 312</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#24</span><span class="post-date">17.12.2014 · 20:30</span></div>
+  <div class="post-text">
+    <p>Речь не о том что умерла в больнице. Речь о том что её можно было привезти раньше. По словам деда — муж знал что плохо. Несколько дней. И тянул время. Когда привёз — уже поздно было.</p>
+    <p>Это не мистика. Это история.</p>
+  </div></div>
+</div>
+
+<!-- #25 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">Natalochka83</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 47</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#25</span><span class="post-date">18.12.2014 · 22:14</span></div>
+  <div class="post-text"><p>Это ужасно если правда. Несколько дней знал и молчал.</p></div>
+  </div>
+</div>
+
+<!-- #26 Оффтопик -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">katya_forum</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 1</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#26</span><span class="post-date">03.03.2015 · 11:22</span></div>
+  <div class="post-text"><p>Простите, не по теме — а там принимают по полису ОМС или только платно?</p></div>
+  </div>
+</div>
+
+<!-- #27 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">irina_forum</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 88</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#27</span><span class="post-date">04.03.2015 · 09:10</span></div>
+  <div class="post-text"><p>По ОМС принимают. Я там лечилась в 2014 — всё нормально оформили. Очередь только большая.</p></div>
+  </div>
+</div>
+
+<!-- #28 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">призрак_чистополя</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 77</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#28</span><span class="post-date">15.06.2015 · 23:45</span></div>
+  <div class="post-text">
+    <p>Нашёл упоминание в районной газете за 1987 год. В разделе хроники. Короткая строчка: «в городской больнице скончалась А-ва В.И.». Инициалы только — так тогда писали.</p>
+    <p>Дата — январь 1987. Больше ничего.</p>
+  </div></div>
+</div>
+
+<!-- #29 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Marina_Chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 215</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#29</span><span class="post-date">16.06.2015 · 09:00</span></div>
+  <div class="post-text"><p>А-ва В.И. — интересно. Если бы ещё полную фамилию...</p></div>
+  </div>
+</div>
+
+<!-- #30 КЛЮЧЕВОЙ — намёк на фамилию Арзяк -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">местный79</div><div class="post-rank">Старожил</div><div class="post-posts-count">Сообщений: 312</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#30</span><span class="post-date">17.06.2015 · 19:44</span></div>
+  <div class="post-text">
+    <p>Дед называл фамилию. Что-то на «А» — Арзяк... Арзякова что ли. Точно не помню. Он уже умер в 2010-м, переспросить не у кого.</p>
+    <p>Говорил что в отделении тогда все знали эту историю.</p>
+  </div></div>
+</div>
+
+<!-- #31 Шум -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">tatiana_b</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 29</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#31</span><span class="post-date">18.06.2015 · 08:12</span></div>
+  <div class="post-text"><p>Вы как детективы тут) Интересная тема вышла.</p></div>
+  </div>
+</div>
+
+<!-- #32 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">sergei_1985</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 4</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#32</span><span class="post-date">22.09.2015 · 14:00</span></div>
+  <div class="post-text"><p>А там вообще страшно лежать по ночам? Мне на следующей неделе — немного нервничаю если честно.</p></div>
+  </div>
+</div>
+
+<!-- #33 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">Natalochka83</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 47</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#33</span><span class="post-date">22.09.2015 · 20:30</span></div>
+  <div class="post-text"><p>Не пугайтесь) Мама лежала нормально, лечилась, выписалась. Одно дело рассказы, другое — больница как больница.</p></div>
+  </div>
+</div>
+
+<!-- #34 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">forum_user88</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 22</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#34</span><span class="post-date">05.12.2015 · 11:30</span></div>
+  <div class="post-text"><p>Кто-то знает расписание невролога в этой больнице? Никак не могу найти актуальное.</p></div>
+  </div>
+</div>
+
+<!-- #35 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">irina_forum</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 88</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#35</span><span class="post-date">06.12.2015 · 09:00</span></div>
+  <div class="post-text"><p>Понедельник-среда-пятница с 9 до 12 в старом корпусе. Но это на 2015-й — могло поменяться.</p></div>
+  </div>
+</div>
+
+<!-- #36 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">призрак_чистополя</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 77</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#36</span><span class="post-date">11.04.2016 · 01:14</span></div>
+  <div class="post-text">
+    <p>Продолжаю искать. Нашёл ещё один источник — запись в личном дневнике одного из врачей того времени, попал мне по знакомству. Написано что в январе 1987 поступила женщина с инсультом. Запущенное. «Сопровождающий сказал что симптомы появились четыре дня назад».</p>
+    <p>Четыре дня.</p>
+  </div></div>
+</div>
+
+<!-- #37 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Marina_Chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 215</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#37</span><span class="post-date">12.04.2016 · 09:15</span></div>
+  <div class="post-text"><p>Четыре дня. Это преступление фактически. Пусть без умысла — но четыре дня с инсультом дома.</p></div>
+  </div>
+</div>
+
+<!-- #38 Скептик снова -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">marina_skeptic</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 154</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#38</span><span class="post-date">13.04.2016 · 10:00</span></div>
+  <div class="post-text"><p>В 1987 году многие не знали признаков инсульта. Не надо судить людей по сегодняшним меркам.</p></div>
+  </div>
+</div>
+
+<!-- #39 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">местный79</div><div class="post-rank">Старожил</div><div class="post-posts-count">Сообщений: 312</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#39</span><span class="post-date">13.04.2016 · 20:44</span></div>
+  <div class="post-text"><p>Дед говорил что знал. Видел что ей плохо. Просто боялся. Это не незнание — это страх и нерешительность. Разные вещи.</p></div>
+  </div>
+</div>
+
+<!-- #40 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">pasha_kazan</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 1</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#40</span><span class="post-date">08.08.2016 · 16:22</span></div>
+  <div class="post-text"><p>Интересная тема. Нашёл случайно пока искал отзывы о больнице. Жуть конечно.</p></div>
+  </div>
+</div>
+
+<!-- #41 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">anon_777</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 1</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#41</span><span class="post-date">03.03.2018 · 02:30</span></div>
+  <div class="post-text"><p>у нас дедушка лежал там в 2017. ничего не говорил про коридор. но ночью иногда что-то бормотал и смотрел в дверной проём. мы думали плохой сон.</p></div>
+  </div>
+</div>
+
+<!-- #42 Natalochka 2018 возврат -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">Natalochka83</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 47</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#42</span><span class="post-date">22.07.2018 · 22:54</span></div>
+  <div class="post-text">
+    <p>Зашла в тему через несколько лет. Мама уже поправилась давно. Но всё равно иногда думаю об этом.</p>
+    <p>Она никогда не рассказывала об этом при детях. Говорила что не хочет пугать. Но мне однажды ночью сказала — «она стояла у окна. смотрела на меня. я не испугалась. мне было её жалко».</p>
+    <p>Не знаю почему это запомнила. Просто запомнила.</p>
+  </div></div>
+</div>
+
+<!-- #43 Шум 2018 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">forum_user22</div><div class="post-rank">Новый</div><div class="post-posts-count">Сообщений: 2</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#43</span><span class="post-date">23.07.2018 · 10:15</span></div>
+  <div class="post-text"><p>ого тема старая. а форум ещё работает?)</p></div>
+  </div>
+</div>
+
+<!-- #44 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">oksana_kazan</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 41</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#44</span><span class="post-date">25.08.2019 · 14:22</span></div>
+  <div class="post-text">
+    <p>Искала отзывы о неврологии, наткнулась на эту тему. Читала час.</p>
+    <p>А кто-то знает куда перевели Валентину Степановну? Слышала что ушла, хотела попасть именно к ней.</p>
+  </div></div>
+</div>
+
+<!-- #45 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌸</div><div class="post-username">yulia_chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 39</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#45</span><span class="post-date">26.08.2019 · 09:30</span></div>
+  <div class="post-text"><p>Её перевели в другой корпус ещё в 2021 кажется по приказу. Говорят сама была против. Пациенты расстроились тогда. Мы даже письмо хотели писать — не написали.</p></div>
+  </div>
+</div>
+
+<!-- #46 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">anon_forum</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 90</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#46</span><span class="post-date">14.11.2020 · 16:02</span></div>
+  <div class="post-text"><p>Вернусь в тему — знаете что интересно. Если это всё правда (история 1987 года) — то где-то в архиве больницы должна быть карта этой пациентки. Медкарты хранят долго.</p></div>
+  </div>
+</div>
+
+<!-- #47 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Marina_Chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 215</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#47</span><span class="post-date">20.01.2021 · 15:40</span></div>
+  <div class="post-text"><p>Кто-нибудь пробовал найти архивы этой больницы онлайн? У них вроде был какой-то сайт — но не могу найти.</p></div>
+  </div>
+</div>
+
+<!-- #48 призрак — КЛЮЧЕВОЙ намёк на архив -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">призрак_чистополя</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 77</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#48</span><span class="post-date">05.01.2023 · 01:17</span></div>
+  <div class="post-text">
+    <p>Обновление — нашёл сайт больницы. Они оцифровали и выложили часть архива карт пациентов, включая старые. С фильтром по отделению и году.</p>
+    <p>Там есть 1987-й. Ищите по неврологии.</p>
+    <p><a href="https://danilhuanpablogavrilia.github.io/ckb3-archive/" target="_blank">danilhuanpablogavrilia.github.io/ckb3-archive</a></p>
+  </div></div>
+</div>
+
+<!-- #49 -->
+<div class="post">
+  <div class="post-side"><div class="post-avatar">🌺</div><div class="post-username">Marina_Chistopol</div><div class="post-rank">Участник</div><div class="post-posts-count">Сообщений: 215</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#49</span><span class="post-date">06.01.2023 · 10:45</span></div>
+  <div class="post-text"><p>Спасибо. Смотрю.</p></div>
+  </div>
+</div>
+
+<div class="gap-bar">— Тема неактивна 3 года 1 месяц —</div>
+
+<!-- #50 — ARZUASHA (ФИНАЛ) -->
+<div class="post post-new">
+  <div class="post-side"><div class="post-avatar">👤</div><div class="post-username">arzuasha</div><div class="post-rank" style="color:#8b3a3a;">Новый</div><div class="post-posts-count">Сообщений: 1</div></div>
+  <div class="post-body"><div class="post-header"><span class="post-num">#50 <span class="new-badge">НОВОЕ</span></span><span class="post-date">14.01.2026 · 03:41</span></div>
+  <div class="post-text">
+    <p>извините что пишу так поздно.</p>
+    <p>мама лежала там в январе. палата 7. она тоже видела её. женщину у окна. говорила нам — мы думали бред после инсульта.</p>
+    <p>мамы больше нет. она умерла 8 января.</p>
+    <p>я нашла эту тему случайно. читала и руки тряслись. потому что мама описывала точно так же. белый халат. окно в конце коридора. и говорила «она смотрит на меня. ей тоже плохо было».</p>
+    <p>вы написали что это было в 1987 году. та женщина. что муж привёз поздно и ничего не смогли сделать.</p>
+    <p>у моей мамы тоже была возможность вызвать скорую раньше. её не вызвали.</p>
+    <p>я не знаю зачем это пишу. просто хочу чтобы кто-то ещё знал.</p>
+  </div></div>
+</div>
 
 </div><!-- /posts -->
 
-<div class="pagination">
-  Страница: <a href="#">1</a>
-</div>
+<div class="pagination">Страница: <a href="#">1</a> <a href="#">2</a> <a href="#">3</a></div>
 
 <div class="forum-footer">
   Форум Чистополя · Powered by SimpleBoard 2.4 · Время сервера: 06:28 МСК<br>
