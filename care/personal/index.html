@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>личное</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#111; color:#aaa; font-family:'Courier New',monospace; min-height:100vh; display:flex; align-items:center; justify-content:center; }
+.box { width:340px; text-align:center; }
+.filename { font-size:11px; color:#444; letter-spacing:3px; text-transform:uppercase; margin-bottom:24px; }
+.lock { font-size:32px; margin-bottom:16px; }
+.prompt { font-size:12px; color:#666; margin-bottom:12px; }
+.hint { font-size:10px; color:#333; margin-bottom:20px; font-style:italic; }
+input[type=text] { background:#1a1a1a; border:1px solid #333; color:#aaa; font-family:'Courier New',monospace; font-size:13px; padding:8px 12px; width:100%; outline:none; text-align:center; letter-spacing:2px; }
+input[type=text]:focus { border-color:#555; }
+.err { font-size:11px; color:#663333; margin-top:10px; min-height:16px; }
+
+/* Финальный текст */
+#content { display:none; max-width:480px; margin:0 auto; padding:40px 20px 80px; }
+#content .meta { font-size:10px; color:#333; letter-spacing:2px; text-transform:uppercase; text-align:center; margin-bottom:48px; }
+#content .text { font-size:14px; line-height:2.2; color:#b8a890; white-space:pre-wrap; }
+</style>
+</head>
+<body>
+
+<div class="box" id="lock">
+  <div class="filename">личное</div>
+  <div class="lock">🔒</div>
+  <div class="prompt">введите пароль</div>
+  <div class="hint">подсказка: мама назвала его первым когда вернулась домой</div>
+  <input type="text" id="pwd" placeholder="_ _ _ _ _" onkeydown="if(event.key==='Enter')check()">
+  <div class="err" id="err"></div>
+</div>
+
+<div id="content">
+  <div class="meta">02.06.2026 &nbsp;·&nbsp; 03:41</div>
+  <div class="text">дети мои
+
+не расстраивайтесь и не вините никого
+не верьте в ужасы
+не верьте в мистику
+
+у меня наконец ясное сознание
+и я хочу чтобы вы понимали
+я всё выдумывала
+мой мозг сам меня обманывал
+и не давал отличать факты от вымысла
+
+вы молодцы
+вы всегда были рядом
+никто так не ухаживал как вы
+я таких не помню
+
+спасибо вам за всё
+я хочу чтобы вы знали
+я ушла спокойно
+
+данил спит
+я не могу говорить сейчас
+я могу писать
+
+оставлю эту запись здесь
+вы во всём разберётесь
+
+будьте добрыми
+любите и цените друг друга
+и кормите кота вовремя
+
+я вас очень сильно люблю</div>
+</div>
+
+<script>
+function check(){
+  const v=document.getElementById('pwd').value.trim().toLowerCase();
+  if(v==='вася'){
+    document.getElementById('lock').style.display='none';
+    document.getElementById('content').style.display='block';
+    document.body.style.background='#0e0e0c';
+  } else {
+    document.getElementById('err').textContent='неверно';
+    setTimeout(()=>document.getElementById('err').textContent='',1500);
+  }
+}
+</script>
+</body>
+</html>

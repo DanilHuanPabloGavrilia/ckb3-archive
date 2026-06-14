@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Архив планшета — Арзяковы</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#1c1c1a; color:#b0a090; font-family:'Courier New',monospace; font-size:12px; padding:30px 20px 60px; }
+.header { text-align:center; margin-bottom:32px; }
+.header h1 { font-size:13px; color:#7a6a5a; letter-spacing:4px; text-transform:uppercase; margin-bottom:6px; }
+.header p { font-size:10px; color:#3a3530; letter-spacing:1px; }
+.folder { max-width:700px; margin:0 auto; }
+.folder-label { font-size:10px; color:#4a4038; letter-spacing:3px; text-transform:uppercase; padding:6px 0; border-bottom:1px solid #2a2520; margin-bottom:4px; margin-top:24px; }
+.file-row { display:flex; align-items:center; padding:7px 10px; border-bottom:1px solid #1e1e1c; cursor:pointer; transition:background .1s; }
+.file-row:hover { background:#222220; }
+.file-icon { width:20px; font-size:13px; margin-right:10px; flex-shrink:0; }
+.file-name { flex:1; color:#a09080; font-size:12px; }
+.file-name.locked { color:#4a3a2a; }
+.file-date { font-size:10px; color:#3a3530; width:100px; text-align:right; flex-shrink:0; }
+.file-size { font-size:10px; color:#3a3530; width:60px; text-align:right; flex-shrink:0; }
+
+/* Viewer overlay */
+#viewer { display:none; position:fixed; inset:0; background:#0e0e0c; z-index:100; overflow-y:auto; padding:40px 20px 60px; }
+#viewer .close-btn { position:fixed; top:16px; right:20px; background:none; border:none; color:#4a4038; font-size:11px; letter-spacing:2px; cursor:pointer; font-family:'Courier New',monospace; }
+#viewer .close-btn:hover { color:#8a7a6a; }
+#viewer .vheader { text-align:center; margin-bottom:32px; }
+#viewer .vheader h2 { font-size:11px; color:#6a5a4a; letter-spacing:3px; text-transform:uppercase; margin-bottom:4px; }
+#viewer .vheader p { font-size:10px; color:#3a3530; }
+#viewer .vcontent { max-width:600px; margin:0 auto; font-size:13px; line-height:2; color:#a09080; white-space:pre-wrap; }
+#viewer .vcontent .note { color:#6a8a6a; font-style:italic; }
+#viewer .vcontent .val { color:#c8b89a; }
+#viewer .vcontent .funny { color:#8a9a7a; font-style:italic; }
+#viewer .vcontent .sad { color:#7a6a5a; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Планшет Алёны — экспорт файлов</h1>
+  <p>Загружено: 12.06.2026 &nbsp;·&nbsp; Период: май — июнь 2026</p>
+</div>
+
+<div class="folder">
+
+  <div class="folder-label">📁 май 2026</div>
+
+  <div class="file-row" onclick="open_file('may01')"><div class="file-icon">📄</div><div class="file-name">01_мая.txt</div><div class="file-date">01.05.2026</div><div class="file-size">2.1 кб</div></div>
+  <div class="file-row" onclick="open_file('may05')"><div class="file-icon">📄</div><div class="file-name">05_мая.txt</div><div class="file-date">05.05.2026</div><div class="file-size">2.4 кб</div></div>
+  <div class="file-row" onclick="open_file('may10')"><div class="file-icon">📄</div><div class="file-name">10_мая.txt</div><div class="file-date">10.05.2026</div><div class="file-size">1.9 кб</div></div>
+  <div class="file-row" onclick="open_file('may14')"><div class="file-icon">📄</div><div class="file-name">14_мая.txt</div><div class="file-date">14.05.2026</div><div class="file-size">2.7 кб</div></div>
+  <div class="file-row" onclick="open_file('may19')"><div class="file-icon">📄</div><div class="file-name">19_мая.txt</div><div class="file-date">19.05.2026</div><div class="file-size">2.2 кб</div></div>
+  <div class="file-row" onclick="open_file('may24')"><div class="file-icon">📄</div><div class="file-name">24_мая.txt</div><div class="file-date">24.05.2026</div><div class="file-size">2.8 кб</div></div>
+  <div class="file-row" onclick="open_file('may28')"><div class="file-icon">📄</div><div class="file-name">28_мая.txt</div><div class="file-date">28.05.2026</div><div class="file-size">3.1 кб</div></div>
+
+  <div class="folder-label">📁 июнь 2026</div>
+
+  <div class="file-row" onclick="open_file('jun01')"><div class="file-icon">📄</div><div class="file-name">01_июня.txt</div><div class="file-date">01.06.2026</div><div class="file-size">2.3 кб</div></div>
+  <div class="file-row" onclick="open_file('jun02')"><div class="file-icon">📄</div><div class="file-name">02_июня.txt</div><div class="file-date">02.06.2026</div><div class="file-size">1.2 кб</div></div>
+
+  <div class="folder-label">📁 фотографии</div>
+
+  <div class="file-row" onclick="open_file('photo1')"><div class="file-icon">🖼</div><div class="file-name">измерение_давления_14мая.jpg</div><div class="file-date">14.05.2026</div><div class="file-size">1.8 мб</div></div>
+  <div class="file-row" onclick="open_file('photo2')"><div class="file-icon">🖼</div><div class="file-name">мама_у_окна_19мая.jpg</div><div class="file-date">19.05.2026</div><div class="file-size">2.1 мб</div></div>
+  <div class="file-row" onclick="open_file('photo3')"><div class="file-icon">🖼</div><div class="file-name">вася_на_кровати_24мая.jpg</div><div class="file-date">24.05.2026</div><div class="file-size">1.4 мб</div></div>
+
+  <div class="folder-label">📁 разное</div>
+
+  <div class="file-row" onclick="window.location='/care/personal/'"><div class="file-icon">🔒</div><div class="file-name locked">личное</div><div class="file-date">02.06.2026</div><div class="file-size">0.8 кб</div></div>
+
+</div>
+
+<!-- VIEWER -->
+<div id="viewer">
+  <button class="close-btn" onclick="close_file()">← закрыть</button>
+  <div class="vheader">
+    <h2 id="v-title"></h2>
+    <p id="v-date"></p>
+  </div>
+  <div class="vcontent" id="v-body"></div>
+</div>
+
+<script>
+const FILES = {
+  may01: {
+    title:'01_мая.txt', date:'01.05.2026',
+    body:`<span class="val">Давление утро: 148/90
+Давление вечер: 142/88
+Сахар утро: 7.4
+Сахар вечер: 7.1</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 0.9 л (пьёт плохо, уговаривали по глотку)
+Еда: каша — половину, суп — отказалась, йогурт вечером.
+
+Гигиена: обтирание утром, подсушивание складок, мазь на пролежни (левый бок).
+
+<span class="note">Примечания:
+Сегодня хорошо спала. Утром узнала меня и Данила.
+Спросила где Вася — я принесла его на кровать. Гладила минут двадцать молча.
+Это хорошие двадцать минут.</span>`
+  },
+  may05: {
+    title:'05_мая.txt', date:'05.05.2026',
+    body:`<span class="val">Давление утро: 152/92
+Давление вечер: 146/90
+Сахар утро: 7.8
+Сахар вечер: 7.3</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 1.0 л
+Еда: завтрак — почти всё, обед — треть, ужин — нормально.
+
+Гигиена: полное обтирание, смена белья, обработка пролежней.
+
+<span class="note">Примечания:
+Данил надевал перчатки — мама долго смотрела.
+Потом говорит: ты неправильно надеваешь. Сначала надо дунуть в каждый палец чтобы они вышли — потом надевай.
+Данил дул. Мама осталась довольна.
+Я еле сдержалась чтобы не засмеяться.</span>`
+  },
+  may10: {
+    title:'10_мая.txt', date:'10.05.2026',
+    body:`<span class="val">Давление утро: 144/88
+Давление вечер: 140/86
+Сахар утро: 7.2
+Сахар вечер: 6.9</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 1.1 л (лучше чем обычно)
+Еда: всё съела за завтраком. Обед — половину. Ужин — хорошо.
+
+Гигиена: обтирание, обработка пролежней (улучшение на левом боку).
+
+<span class="note">Примечания:
+Спросила где она находится. Я говорю — дома, мам.
+Она говорит — нет. Дома у меня обои другие.
+Обои мы меняли в 2019-м. Не стала объяснять.
+
+Вася сидел у неё в ногах весь день. Мама его звала по имени — значит сегодня узнаёт.</span>`
+  },
+  may14: {
+    title:'14_мая.txt', date:'14.05.2026',
+    body:`<span class="val">Давление утро: 158/94
+Давление вечер: 150/91
+Сахар утро: 8.1
+Сахар вечер: 7.6</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 0.7 л — плохо, уговаривали долго
+Еда: почти ничего за завтрак. Обед — бульон. Ужин — йогурт.
+
+Гигиена: обтирание, подсушивание, смена позиции.
+
+<span class="note">Примечания:
+Сегодня не узнала меня.
+Смотрела долго. Потом спросила — вы из социальной службы?
+Я говорю — мам, я Алёна, твоя дочь.
+Она говорит — у меня нет дочери с такими короткими волосами.
+
+Данил пришёл вечером. Её узнал. Она его назвала Серёжей.
+Он спросил — кто такой Серёжа?
+Мама говорит — ну брат мой, ты его не знаешь.
+У неё нет брата.
+
+Данил не спорил. Просто сказал — хорошо, мама.</span>`
+  },
+  may19: {
+    title:'19_мая.txt', date:'19.05.2026',
+    body:`<span class="val">Давление утро: 136/84
+Давление вечер: 133/82
+Сахар утро: 7.0
+Сахар вечер: 6.8</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 1.2 л — хороший день по воде
+Еда: всё три раза съела нормально.
+
+Гигиена: обтирание, мазь.
+
+<span class="note">Примечания:
+Хороший день. Была в ясности почти всё утро.
+Смотрела в окно долго. Я спросила — о чём думаешь?
+Она говорит — о Васе. Он толстеет.
+Вася действительно толстеет.
+
+Попросила взять её руку. Держали так минут десять.
+Она не говорила ничего. Я тоже.</span>`
+  },
+  may24: {
+    title:'24_мая.txt', date:'24.05.2026',
+    body:`<span class="val">Давление утро: 142/88
+Давление вечер: 138/86
+Сахар утро: 7.3
+Сахар вечер: 7.0</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 0.9 л
+Еда: завтрак — хорошо, обед — чуть меньше половины, ужин — нормально.
+
+Гигиена: полное обтирание, подсушивание.
+
+<span class="note">Примечания:
+Мама сегодня долго держала планшет.
+Попросила помочь сохранить что-то. Я помогла.
+Спросила — поставь пароль.
+Я спросила — какой?
+Она подумала и говорит — имя того кто нас не бросает.
+Я не поняла сразу.
+Она засмеялась — ну кот, сынок. Кот.
+
+Вася лежал рядом и не понимал почему смеёмся.</span>`
+  },
+  may28: {
+    title:'28_мая.txt', date:'28.05.2026',
+    body:`<span class="val">Давление утро: 150/91
+Давление вечер: 145/89
+Сахар утро: 7.6
+Сахар вечер: 7.2</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 0.8 л
+Еда: плохо весь день. Бульон и йогурт.
+
+Гигиена: обтирание, обработка пролежней, смена белья.
+
+<span class="note">Примечания:
+Не очень хороший день.
+Называла каких-то людей. Имена незнакомые. Разговаривала с пространством.
+Данил сидел рядом. Не перебивал.
+
+Вечером успокоилась. Попросила включить тихую музыку.
+Включили. Она закрыла глаза.
+Мы думали засыпает — а она тихо пела. Что-то старое. Не знаю слов.
+Данил знал. Тоже начал тихо. Они пели вдвоём минуты три.
+
+Я вышла в коридор.</span>`
+  },
+  jun01: {
+    title:'01_июня.txt', date:'01.06.2026',
+    body:`<span class="val">Давление утро: 138/85
+Давление вечер: 134/82
+Сахар утро: 7.1
+Сахар вечер: 6.9</span>
+
+Таблетки: ✓ (10:00 / 20:00)
+Вода: 1.0 л
+Еда: завтрак — половину, обед — немного, ужин — отказалась, только чай.
+
+Гигиена: обтирание, подсушивание.
+
+<span class="note">Примечания:
+Спокойный день. Говорила мало.
+Смотрела на нас долго. На меня, на Данила, на Васю.
+Как будто запоминала.
+
+Вечером сказала — вы хорошие дети. Я вам благодарна.
+Мы не знали что ответить. Данил сказал — и мы тебе.
+Она кивнула и закрыла глаза.
+
+Данил остался на ночь.</span>`
+  },
+  jun02: {
+    title:'02_июня.txt', date:'02.06.2026',
+    body:`<span class="val">Давление утро: —
+Сахар утро: —</span>
+
+<span class="sad">Данил остался на ночь.
+Я ушла домой около полуночи.
+
+Утром 03.06 в 06:12 он позвонил мне.
+
+Процедуры делать уже не нужно было.</span>`
+  },
+  photo1: {
+    title:'измерение_давления_14мая.jpg', date:'14.05.2026',
+    body:`[ Фотография ]
+
+На снимке — мамина рука с манжетой тонометра.
+Показание на дисплее: 158/94, пульс 78.
+На фоне — больничное одеяло и край подушки.
+Сбоку видна лапа Васи.`
+  },
+  photo2: {
+    title:'мама_у_окна_19мая.jpg', date:'19.05.2026',
+    body:`[ Фотография ]
+
+Мама смотрит в окно. Снимок со спины.
+Халат. Голова чуть наклонена.
+За окном — двор, деревья, начало лета.
+
+Она не знала что её снимают.`
+  },
+  photo3: {
+    title:'вася_на_кровати_24мая.jpg', date:'24.05.2026',
+    body:`[ Фотография ]
+
+Вася лежит рядом с мамой.
+Она гладит его одной рукой.
+Глаза у неё закрыты — или почти закрыты.
+Кот смотрит в объектив.`
+  }
+};
+
+function open_file(id) {
+  const f = FILES[id];
+  if (!f) return;
+  document.getElementById('v-title').textContent = f.title;
+  document.getElementById('v-date').textContent = f.date;
+  document.getElementById('v-body').innerHTML = f.body;
+  document.getElementById('viewer').style.display = 'block';
+  window.scrollTo(0,0);
+}
+function close_file() {
+  document.getElementById('viewer').style.display = 'none';
+}
+</script>
+</body>
+</html>
